@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 1. 什么是scope？ scope用来声明IOC容器中的对象应该处的限定场景或者说该对象的存活空间，即在IOC容器在对象进入相应的scope之前，生成并装配这些对象，在该对象不再处于这些scope的限定之后，容器通常会销毁这些对象。 
+		2. scope分类 目前，scope的取值有5种。 在Spring 2.0之前，有singleton和prototype两种； 在Spring 
+		2.0之后，为支持web应用的ApplicationContext，推出另外三种：request，session和global session类型。 
+		3. singleton （单一实例） 一个容器中只存在一个实例，所有对该类型bean的依赖都引用这一单一实例，这就好像每个幼儿园都会有一个滑梯一样，这个幼儿园的小朋友共同使用这一个滑梯，而对于幼儿园容器来说，滑梯就是一个singleton的bean。 
+		此外，singleton类型的bean定义，从容器启动，到他第一次被请求而实例化开始，只要容器不销毁或退出，该类型的bean的单一实例就会一直存活。 
+		4. prototype prototype的bean，容器在接受到该类型的对象的请求的时候，会每次都重新生成一个新的对象给请求方，虽然这种类型的对象的实例化以及属性设置等工作都是由容器负责的，但是只要准备完毕，并且对象实例返回给请求方之后，容器就不在拥有当前对象的引用，请求方需要自己负责当前对象后继生命周期的管理工作，包括该对象的销毁。也就是说，容器每次返回请求方该对象的一个新的实例之后，就由这个对象“自生自灭”了。 
+		让我们继续幼儿园的比喻，我们今天要分苹果了！将苹果的bean的scope属性声明为prototype，在每个小朋友领取苹果的时候，我们都是发一个新的苹果给他，发完之后，小朋友爱怎么吃就怎么吃，爱什么时候吃什么时候吃，但是注意吃完要把果核扔到垃圾箱哦！对于那些不能共享使用的对象类型，应该将其定义的scope设为prototype，通常，声明为prototype的的bean，都是一些有状态的，比如保存为每个顾客信息的对象。 
+		5. request ，session和global session 他们只适用于web程序，通常是和XmlWebApplicationContext共同使用 
+		5. 1 request： <bean id ="requestPrecessor" class="...RequestPrecessor" scope="request" /> Spring容器，即XmlWebApplicationContext 会为每个HTTP请求创建一个全新的RequestPrecessor对象，当请求结束后，，该对象的生命周期即告结束。当同时有10个HTTP请求进来的时候，容器会分别针对这10个请求创建10个全新的RequestPrecessor实例，且他们相互之间互不干扰，从不是很严格的意义上说，request可以看做prototype的一种特例，除了场景更加具体之外，语意上差不多。 
+		5.2 session： 对于web应用来说，放到session中最普遍的就是用户的登录信息，对于这种放到session中的信息，我们可以使用如下形式的制定scope为session： 
+		<bean id ="userPreferences" class="...UserPreferences" scope="session" /> 
+		Spring容器会为每个独立的session创建属于自己的全新的UserPreferences实例，他比request scope的bean会存活更长的时间，其他的方面真是没什么区别。 
+		5.3 global session： <bean id ="userPreferences" class="...UserPreferences" 
+		scope="globalsession" /> global session只有应用在基于porlet的web应用程序中才有意义，他映射到porlet的global范围的session，如果普通的servlet的web 
+		应用中使用了这个scope，容器会把它作为普通的session的scope对待。 -->
+	
+	 	
+</beans>

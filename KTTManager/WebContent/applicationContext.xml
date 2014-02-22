@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<context:annotation-config />
+	<import resource="spring/beans.xml"/>
+<!-- 	<import resource="spring/infrastructure-db.xml" />
+	<import resource="spring/infrastructure-redis.xml" />
+	<import resource="spring/infrastructure-webstatic.xml" />
+	<import resource="spring/infrastructure-requestwap-client.xml" />
+	<import resource="spring/infrastructure-alipay-api-client.xml" />
+	<import resource="spring/context-orm.xml" />
+	<import resource="spring/context-baidu-beans.xml" />
+	<import resource="spring/context-business-common.xml" />
+	<import resource="spring/context-business-buy.xml" />
+	<import resource="spring/context-business-user.xml" />
+	<import resource="spring/context-business-info.xml" />
+	<import resource="spring/context-business-info-kaijiang.xml" />
+	<import resource="spring/context-newsinfo.xml" />
+ -->
+    <import resource="spring/databaseconfig-mysql.xml"/>
+ </beans>

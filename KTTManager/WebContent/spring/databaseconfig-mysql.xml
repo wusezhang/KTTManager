@@ -1,0 +1,51 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+	 http://www.springframework.org/schema/beans/spring-beans.xsd 
+	 http://www.springframework.org/schema/context 
+	 http://www.springframework.org/schema/context/spring-context.xsd 
+	 http://www.springframework.org/schema/tx 
+	 http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+	 http://www.springframework.org/schema/aop 
+	 http://www.springframework.org/schema/aop/spring-aop-2.5.xsd ">
+
+   <!--加载Mysql数据源的属性文件 -->
+   <context:property-placeholder location="classpath*:database.properties"/>
+    
+    <bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"> 
+        <property name="driverClass" value="${jdbc.driver}" /> 
+        <property name="jdbcUrl" value="${jdbc.url}" /> 
+        <property name="user" value="${jdbc.username}" /> 
+        <property name="password" value="${jdbc.password}" />   
+        
+        <!-- C3P0 数据库连接池 配置 --> 
+        <property name="minPoolSize" value="${jdbc.minPoolSize}" /> 
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}" /> 
+        <property name="maxIdleTime" value="${jdbc.maxIdleTime}" /> 
+        <property name="acquireRetryDelay" value="${jdbc.acquireRetryDelay}" />
+        <property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}" />
+        <property name="breakAfterAcquireFailure" value="${jdbc.breakAfterAcquireFailure}" />
+        <property name="maxStatements" value="${jdbc.maxStatements}" />
+        <property name="debugUnreturnedConnectionStackTraces" value="${jdbc.debugUnreturnedConnectionStackTraces}" />
+    </bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+    
+    <!--使用annotation定义事务,注解事物配置-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+    
+    <!--整合相应的MyBatis持久层相应的插件并注册相应的MyBatis模板 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource" />
+      <property name="mapperLocations" value="classpath*:com/ktproject/mappers/**/*.xml"/>
+    </bean>
+    
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+       <constructor-arg  index="0" ref="sqlSessionFactory"/>
+    </bean>
+    
+</beans>
